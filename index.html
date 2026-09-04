@@ -1,338 +1,59 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aniversário do Gabriel — 18.09</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
-
-  :root{
-    --bg: #0a0b0f;
-    --surface: #121319;
-    --line: #23252f;
-    --text: #eceef2;
-    --muted: #767c8c;
-    --accent: #5b8def;
-  }
-
-  *{ box-sizing: border-box; }
-  html,body{ height: 100%; margin: 0; }
-
-  body{
-    background: var(--bg);
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 34px 34px;
-    background-position: -1px -1px;
-    color: var(--text);
-    font-family: 'Space Grotesk', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 56px 16px;
-    min-height: 100vh;
-  }
-
-  .mono{ font-family: 'JetBrains Mono', monospace; }
-
-  .card{
-    position: relative;
-    width: 100%;
-    max-width: 460px;
-    background: var(--surface);
-    border: 1px solid var(--line);
-  }
-
-  .corner{
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    border: 1.5px solid var(--accent);
-  }
-  .corner.tl{ top: -1px; left: -1px; border-right: none; border-bottom: none; }
-  .corner.tr{ top: -1px; right: -1px; border-left: none; border-bottom: none; }
-  .corner.bl{ bottom: -1px; left: -1px; border-right: none; border-top: none; }
-  .corner.br{ bottom: -1px; right: -1px; border-left: none; border-top: none; }
-
-  .topbar{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--line);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    color: var(--muted);
-  }
-
-  .dot{
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    margin-right: 6px;
-    box-shadow: 0 0 6px var(--accent);
-    animation: blink 1.6s infinite ease-in-out;
-  }
-  @keyframes blink{ 0%,100%{ opacity: 1; } 50%{ opacity: 0.25; } }
-
-  .content{ padding: 30px 26px 28px; }
-
-  .eyebrow{
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    color: var(--accent);
-    margin-bottom: 10px;
-  }
-
-  h1{
-    font-weight: 600;
-    font-size: 34px;
-    line-height: 1.15;
-    margin: 0 0 4px;
-    color: var(--text);
-  }
-
-  h1 .who{ color: var(--accent); }
-
-  .tagline{
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.55;
-    margin: 12px 0 28px;
-    max-width: 380px;
-  }
-
-  /* Countdown */
-  .countdown{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-    margin-bottom: 28px;
-  }
-  .cd-block{
-    background: var(--bg);
-    padding: 14px 6px;
-    text-align: center;
-  }
-  .cd-num{
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--text);
-  }
-  .cd-label{
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    margin-top: 5px;
-  }
-
-  /* Details */
-  .details{ margin-bottom: 26px; }
-
-  .row{
-    display: grid;
-    grid-template-columns: 84px 1fr;
-    gap: 12px;
-    padding: 14px 0;
-    border-top: 1px solid var(--line);
-  }
-  .row:first-child{ border-top: none; }
-
-  .row .key{
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-    padding-top: 2px;
-  }
-
-  .row .val{
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text);
-  }
-  .row .sub{
-    font-size: 12.5px;
-    color: var(--muted);
-    margin-top: 3px;
-  }
-  .row a{
-    color: var(--accent);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(91,141,239,0.35);
-  }
-  .row a:hover{ border-color: var(--accent); }
-
-  /* Actions */
-  .actions{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  button.rsvp-btn, a.map-btn{
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12.5px;
-    letter-spacing: 0.04em;
-    padding: 13px 16px;
-    border-radius: 2px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: all 0.15s ease;
-  }
-
-  button.rsvp-btn{
-    background: var(--accent);
-    color: var(--bg);
-    border: 1px solid var(--accent);
-  }
-  button.rsvp-btn:hover{ background: transparent; color: var(--accent); }
-
-  a.map-btn{
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--line);
-  }
-  a.map-btn:hover{ border-color: var(--accent); color: var(--accent); }
-
-  .confirmed-msg{
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--accent);
-    margin-top: 12px;
-    min-height: 16px;
-  }
-
-  .footer-line{
-    margin-top: 26px;
-    padding-top: 16px;
-    border-top: 1px solid var(--line);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-    text-align: center;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aniversário do Gabriel — 18.09</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    :root { --bg:#0a0b0f; --surface:#121319; --line:#23252f; --text:#eceef2; --muted:#767c8c; --accent:#5b8def; }
+    * { box-sizing:border-box; } html,body { min-height:100%; margin:0; }
+    body { background-color:var(--bg); background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px); background-size:34px 34px; background-position:-1px -1px; color:var(--text); font-family:'Space Grotesk',sans-serif; display:flex; justify-content:center; align-items:flex-start; padding:56px 16px; overflow-x:hidden; }
+    .mono,button,input { font-family:'JetBrains Mono',monospace; } #confetti-canvas { position:fixed; inset:0; pointer-events:none; z-index:5; }
+    .card { position:relative; z-index:1; width:100%; max-width:460px; background:var(--surface); border:1px solid var(--line); }
+    .card.pulse { animation:card-pulse .5s cubic-bezier(.22,1.4,.36,1); } @keyframes card-pulse { 0%,100%{transform:scale(1)}35%{transform:scale(1.025)} }
+    .corner { position:absolute; width:14px; height:14px; border:1.5px solid var(--accent); } .tl{top:-1px;left:-1px;border-right:0;border-bottom:0}.tr{top:-1px;right:-1px;border-left:0;border-bottom:0}.bl{bottom:-1px;left:-1px;border-right:0;border-top:0}.br{bottom:-1px;right:-1px;border-left:0;border-top:0}
+    .topbar { display:flex; justify-content:space-between; align-items:center; padding:14px 20px; border-bottom:1px solid var(--line); font:11px 'JetBrains Mono',monospace; letter-spacing:.04em; color:var(--muted); } .dot { display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:6px;box-shadow:0 0 6px var(--accent);animation:blink 1.6s infinite ease-in-out}@keyframes blink{50%{opacity:.25}}
+    .content { padding:30px 26px 28px; }.eyebrow{font-size:11px;letter-spacing:.08em;color:var(--accent);margin-bottom:10px}h1{font-size:34px;line-height:1.15;font-weight:600;margin:0 0 4px}.who{color:var(--accent)}.tagline{font-size:14px;color:var(--muted);line-height:1.55;margin:12px 0 28px;max-width:380px}
+    .countdown { display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:28px }.cd-block{background:var(--bg);padding:14px 6px;text-align:center}.cd-num{font:600 22px 'JetBrains Mono',monospace}.cd-label{font:9px 'JetBrains Mono',monospace;letter-spacing:.1em;color:var(--muted);margin-top:5px}
+    .details{margin-bottom:26px}.row{display:grid;grid-template-columns:84px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--line)}.row:first-child{border-top:0}.key{font:10.5px 'JetBrains Mono',monospace;letter-spacing:.06em;color:var(--muted);padding-top:2px}.val{font-size:15px;font-weight:500}.sub{font-size:12.5px;color:var(--muted);margin-top:3px}.row a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(91,141,239,.35)}
+    .actions{display:flex;flex-direction:column;gap:10px}.guest-name{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--text);padding:13px 16px;font-size:12.5px;border-radius:2px;outline:none}.guest-name:focus{border-color:var(--accent)}
+    button.rsvp-btn,a.map-btn{font:12.5px 'JetBrains Mono',monospace;letter-spacing:.04em;padding:13px 16px;border-radius:2px;cursor:pointer;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .15s ease}button.rsvp-btn{background:var(--accent);color:var(--bg);border:1px solid var(--accent)}button.rsvp-btn:hover:not(:disabled){background:transparent;color:var(--accent)}button.rsvp-btn:disabled{cursor:wait;opacity:.75}a.map-btn{background:transparent;color:var(--text);border:1px solid var(--line)}a.map-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .confirmed-msg{font:12px 'JetBrains Mono',monospace;color:var(--accent);margin-top:12px;min-height:16px;opacity:0;transform:translateY(-4px);transition:opacity .35s,transform .35s}.confirmed-msg.show{opacity:1;transform:translateY(0)}.confirmed-msg.error{color:#ff8d7a}.footer-line{margin-top:26px;padding-top:16px;border-top:1px solid var(--line);font:10.5px 'JetBrains Mono',monospace;letter-spacing:.06em;color:var(--muted);text-align:center}
+  </style>
 </head>
 <body>
-
-<div class="card">
-  <div class="corner tl"></div>
-  <div class="corner tr"></div>
-  <div class="corner bl"></div>
-  <div class="corner br"></div>
-
-  <div class="topbar">
-    <span><span class="dot"></span>EVENTO_ATIVO</span>
-    <span>ID// GABRIEL-BDAY-2026</span>
-  </div>
-
-  <div class="content">
-    <div class="eyebrow mono">// CONVITE</div>
-    <h1>Aniversário<br>do <span class="who">Gabriel</span></h1>
-
-    <p class="tagline">
-      Te convido a comemorar esse dia especial ao meu lado.
-    </p>
-
-    <div class="countdown">
-      <div class="cd-block"><div class="cd-num" id="cd-days">--</div><div class="cd-label">DIAS</div></div>
-      <div class="cd-block"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">HORAS</div></div>
-      <div class="cd-block"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">MIN</div></div>
-      <div class="cd-block"><div class="cd-num" id="cd-secs">--</div><div class="cd-label">SEG</div></div>
+  <canvas id="confetti-canvas"></canvas>
+  <main class="card" id="card">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <div class="topbar"><span><span class="dot"></span>EVENTO_ATIVO</span><span>ID// GABRIEL-BDAY-2026</span></div>
+    <div class="content">
+      <div class="eyebrow mono">// CONVITE</div><h1>Aniversário<br>do <span class="who">Gabriel</span></h1>
+      <p class="tagline">Te convido a comemorar esse dia especial ao meu lado.</p>
+      <section class="countdown" aria-label="Contagem regressiva"><div class="cd-block"><div class="cd-num" id="cd-days">--</div><div class="cd-label">DIAS</div></div><div class="cd-block"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">HORAS</div></div><div class="cd-block"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">MIN</div></div><div class="cd-block"><div class="cd-num" id="cd-secs">--</div><div class="cd-label">SEG</div></div></section>
+      <section class="details"><div class="row"><div class="key">DATA</div><div><div class="val">Sexta-feira, 18 de setembro</div><div class="sub">A partir das 19h</div></div></div><div class="row"><div class="key">LOCAL</div><div><div class="val">Arena Bar &amp; Petiscaria</div><div class="sub">Rua Demócrito Rocha — <a id="mapsLink" href="#" target="_blank" rel="noopener">ver no mapa</a></div></div></div><div class="row"><div class="key">HORÁRIO</div><div><div class="val">A partir das 19h</div><div class="sub">Happy hour até as 21h</div></div></div></section>
+      <!-- Formulário Formspree configurado para receber as confirmações. -->
+      <form id="rsvpForm" class="actions" novalidate>
+        <input class="guest-name" id="guestName" name="nome" type="text" maxlength="80" placeholder="SEU NOME" autocomplete="name" required>
+        <input name="evento" type="hidden" value="Aniversário do Gabriel — 18/09/2026">
+        <button class="rsvp-btn" id="rsvpBtn" type="submit">[ CONFIRMAR PRESENÇA ]</button>
+        <a class="map-btn" id="mapsBtn" href="#" target="_blank" rel="noopener">ABRIR NO GOOGLE MAPS</a>
+      </form>
+      <div class="confirmed-msg" id="confirmedMsg" role="status" aria-live="polite"></div>
+      <div class="footer-line">TE ESPERAMOS LÁ · 18.09.2026</div>
     </div>
-
-    <div class="details">
-      <div class="row">
-        <div class="key mono">DATA</div>
-        <div>
-          <div class="val">Sexta-feira, 18 de setembro</div>
-          <div class="sub">A partir das 19h</div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="key mono">LOCAL</div>
-        <div>
-          <div class="val">Arena Bar &amp; Petiscaria</div>
-          <div class="sub">Rua Democrito Rocha — <a id="mapsLink" href="#" target="_blank" rel="noopener">ver no mapa</a></div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="key mono">HORÁRIO</div>
-        <div>
-          <div class="val">A partir das 19h</div>
-          <div class="sub">Happy hour até as 21h</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="actions">
-      <button class="rsvp-btn" id="rsvpBtn">[ CONFIRMAR PRESENÇA ]</button>
-      <a class="map-btn" id="mapsBtn" href="#" target="_blank" rel="noopener">ABRIR NO GOOGLE MAPS</a>
-    </div>
-    <div class="confirmed-msg" id="confirmedMsg"></div>
-
-    <div class="footer-line">TE ESPERAMOS LÁ · 18.09.2026</div>
-  </div>
-</div>
-
-<script>
-  // ---- Countdown ----
-  // Ajuste o horário abaixo (formato: 'YYYY-MM-DDTHH:MM:SS')
-  const eventDate = new Date('2026-09-18T20:00:00');
-
-  function updateCountdown(){
-    const now = new Date();
-    let diff = eventDate - now;
-    if(diff < 0) diff = 0;
-
-    const days = Math.floor(diff / (1000*60*60*24));
-    const hours = Math.floor((diff / (1000*60*60)) % 24);
-    const mins = Math.floor((diff / (1000*60)) % 60);
-    const secs = Math.floor((diff / 1000) % 60);
-
-    document.getElementById('cd-days').textContent = String(days).padStart(2,'0');
-    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
-    document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0');
-    document.getElementById('cd-secs').textContent = String(secs).padStart(2,'0');
-  }
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-
-  // ---- Maps link ----
-  const address = "Rua Democrito Rocha, Arena Bar e Petiscaria";
-  const mapsUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(address);
-  document.getElementById('mapsLink').href = mapsUrl;
-  document.getElementById('mapsBtn').href = mapsUrl;
-
-  // ---- RSVP ----
-  const rsvpBtn = document.getElementById('rsvpBtn');
-  const confirmedMsg = document.getElementById('confirmedMsg');
-  let confirmed = false;
-
-  rsvpBtn.addEventListener('click', () => {
-    if(!confirmed){
-      confirmed = true;
-      rsvpBtn.textContent = "[ PRESENÇA CONFIRMADA ✓ ]";
-      confirmedMsg.textContent = "> registro salvo. até dia 18.";
-    }
-  });
-</script>
-
+  </main>
+  <script>
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xbgjkkly';
+    const eventDate = new Date('2026-09-18T20:00:00');
+    function updateCountdown(){let diff=Math.max(0,eventDate-new Date());const vals=[Math.floor(diff/86400000),Math.floor(diff/3600000)%24,Math.floor(diff/60000)%60,Math.floor(diff/1000)%60];['days','hours','mins','secs'].forEach((part,i)=>document.getElementById('cd-'+part).textContent=String(vals[i]).padStart(2,'0'));} updateCountdown();setInterval(updateCountdown,1000);
+    const mapsUrl='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent('Rua Democrito Rocha, Arena Bar e Petiscaria'); document.getElementById('mapsLink').href=mapsUrl;document.getElementById('mapsBtn').href=mapsUrl;
+    const canvas=document.getElementById('confetti-canvas'),ctx=canvas.getContext('2d');let particles=[],rafId,dpr;
+    function resizeCanvas(){dpr=Math.min(devicePixelRatio||1,2);canvas.width=innerWidth*dpr;canvas.height=innerHeight*dpr;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';ctx.setTransform(dpr,0,0,dpr,0,0)}resizeCanvas();addEventListener('resize',resizeCanvas);
+    function launchConfetti(x,y){const colors=['#5b8def','#ffb14d','#ff6a2e','#eceef2','#7dd3fc'];for(let i=0;i<90;i++){const a=Math.random()*Math.PI+Math.PI,s=4+Math.random()*7;particles.push({x,y,vx:Math.cos(a)*s*(.4+Math.random()),vy:Math.sin(a)*s-2,size:4+Math.random()*5,color:colors[Math.random()*colors.length|0],rot:Math.random()*6.28,vrot:(Math.random()-.5)*.35,circle:Math.random()<.5,life:0,max:70+Math.random()*40})}if(!rafId)rafId=requestAnimationFrame(tick)}
+    function tick(){ctx.clearRect(0,0,innerWidth,innerHeight);particles.forEach(p=>{p.vx*=.992;p.vy=p.vy*.992+.16;p.x+=p.vx;p.y+=p.vy;p.rot+=p.vrot;p.life++;ctx.save();ctx.globalAlpha=Math.max(0,1-p.life/p.max);ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.fillStyle=p.color;if(p.circle){ctx.beginPath();ctx.arc(0,0,p.size/2,0,6.28);ctx.fill()}else ctx.fillRect(-p.size/2,-p.size/3,p.size,p.size*.6);ctx.restore()});particles=particles.filter(p=>p.life<p.max&&p.y<innerHeight+40);rafId=particles.length?requestAnimationFrame(tick):(ctx.clearRect(0,0,innerWidth,innerHeight),null)}
+    const form=document.getElementById('rsvpForm'),btn=document.getElementById('rsvpBtn'),nameInput=document.getElementById('guestName'),message=document.getElementById('confirmedMsg'),card=document.getElementById('card');
+    form.addEventListener('submit',async event=>{event.preventDefault();const name=nameInput.value.trim();message.className='confirmed-msg show';if(!name){message.classList.add('error');message.textContent='> informe seu nome para confirmar.';nameInput.focus();return}if(FORMSPREE_ENDPOINT.includes('SEU_ID')){message.classList.add('error');message.textContent='> falta configurar o ID do formulário.';return}btn.disabled=true;btn.textContent='[ ENVIANDO... ]';try{const response=await fetch(FORMSPREE_ENDPOINT,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});if(!response.ok)throw new Error('Falha ao enviar');btn.textContent='[ PRESENÇA CONFIRMADA ✓ ]';message.className='confirmed-msg show';message.textContent='> presença registrada. até dia 18.';card.classList.remove('pulse');void card.offsetWidth;card.classList.add('pulse');const rect=btn.getBoundingClientRect();launchConfetti(rect.left+rect.width/2,rect.top);setTimeout(()=>{launchConfetti(innerWidth*.15,innerHeight*.3);launchConfetti(innerWidth*.85,innerHeight*.3)},120)}catch(error){btn.disabled=false;btn.textContent='[ TENTAR NOVAMENTE ]';message.className='confirmed-msg show error';message.textContent='> não foi possível confirmar. tente novamente.'}});
+  </script>
 </body>
 </html>
